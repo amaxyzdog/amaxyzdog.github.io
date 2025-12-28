@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件下载中心</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* 页面背景和主体布局 */
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        /* 下载卡片容器 */
+        .download-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        /* 卡片悬停动画 */
+        .download-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 装饰元素 */
+        .download-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        /* 设备提示栏 */
+        .device-tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        /* 标题样式 */
+        .file-title {
+            font-size: 28px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .file-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 3px;
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .download-container:hover .file-title::after {
+            transform: scaleX(1);
+        }
+
+        /* 目录样式 */
+        .download-directory {
+            margin: 30px 0;
+        }
+
+        .directory-header {
+            font-size: 20px;
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .directory-header i {
+            color: #667eea;
+            margin-right: 10px;
+        }
+
+        /* 下载项列表 */
+        .download-list {
+            list-style: none;
+            display: grid;
+            gap: 15px;
+        }
+
+        .download-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .download-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .item-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .item-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .item-meta i {
+            margin-right: 5px;
+            color: #667eea;
+        }
+
+        /* 下载按钮样式 */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+        }
+
+        .download-btn:active {
+            transform: translateY(1px);
+        }
+
+        .download-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        /* 加载动画 */
+        .loader {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 下载提示 */
+        .download-tip {
+            margin-top: 20px;
+            color: #4a5568;
+            font-size: 14px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+
+        /* 隐藏元素 */
+        .hidden {
+            display: none !important;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .download-container {
+                padding: 30px 20px;
+            }
+
+            .file-title {
+                font-size: 24px;
+            }
+
+            .directory-header {
+                font-size: 18px;
+            }
+
+            .item-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .download-btn {
+                padding: 8px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <!-- 引入Font Awesome图标库（升级到最新版，确保图标可用） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="download-container">
+        <!-- 修复Windows图标类名 -->
+        <div class="device-tag" id="deviceTag">
+            <i class="fab fa-windows"></i> Windows下载中心
+        </div>
+
+        <h1>MC相关文件下载</h1>
+        
+        <!-- Windows电脑端下载目录 -->
+        <div class="download-directory" id="pcDirectory">
+            <h2 class="directory-header">
+                <i class="fab fa-windows"></i> 电脑（Windows）文件[2]
+            </h2>
+            <ul class="download-list">
+                <li class="download-item">
+                    <div class="item-info">
+                        <div class="item-name">PCL2-v2.10.9 | 我的世界启动器</div>
+                        <div class="item-meta">
+                            <span><i class="fas fa-file-exe"></i>EXE</span>
+                            <span><i class="fas fa-weight"></i>5.49 MB</span>
+                            <span><i class="fas fa-calendar"></i>2025-12-27</span>
+                        </div>
+                    </div>
+                    <a href="https://www.panurl.cn/down.php/565fb0a79911b996142b73e0d4f17dee.exe" class="download-btn pc-download">
+                        <i class="fas fa-download"></i> 立即下载
+                    </a>
+                </li>
+            </ul>
+            <br/>
+            <ul class="download-list">
+                <li class="download-item">
+                    <div class="item-info">
+                        <div class="item-name">PC FO-v1-6.4.0 | 整合包 | 拖动到启动器进行安装</div>
+                        <div class="item-meta">
+                            <span><i class="fas fa-file-archive"></i>ZIP</span>
+                            <span><i class="fas fa-weight"></i>134.85 MB</span>
+                            <span><i class="fas fa-calendar"></i>2025-12-27</span>
+                        </div>
+                    </div>
+                    <a href="https://www.panurl.cn/down.php/0df17ceeffe06b06457db321aa1cbfc5.zip" class="download-btn pc-download">
+                        <i class="fas fa-download"></i> 立即下载
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Android手机端下载目录 -->
+        <div class="download-directory hidden" id="mobileDirectory">
+            <h2 class="directory-header">
+                <i class="fab fa-android"></i> 手机（Android）文件[2]
+            </h2>
+            <ul class="download-list">
+                <li class="download-item">
+                    <div class="item-info">
+                        <div class="item-name">FCL-v1.2.7.5 | 我的世界启动器</div>
+                        <div class="item-meta">
+                            <span><i class="fas fa-file-apk"></i>APK</span>
+                            <span><i class="fas fa-weight"></i>234.72 MB</span>
+                            <span><i class="fas fa-calendar"></i>2025-12-27</span>
+                        </div>
+                    </div>
+                    <a href="https://www.panurl.cn/down.php/b6acff19dbc4d1ae5304d9e0a7eda0b3.apk" class="download-btn mobile-download">
+                        <i class="fas fa-download"></i> 立即下载
+                    </a>
+                </li>
+            </ul>
+            <br/>
+            <ul class="download-list">
+                <li class="download-item">
+                    <div class="item-info">
+                        <div class="item-name">PE FO-v1-6.4.0 | 整合包 | 拖动到启动器进行安装</div>
+                        <div class="item-meta">
+                            <span><i class="fas fa-file-archive"></i>ZIP</span>
+                            <span><i class="fas fa-weight"></i>103.91 MB</span>
+                            <span><i class="fas fa-calendar"></i>2025-12-27</span>
+                        </div>
+                    </div>
+                    <a href="https://www.panurl.cn/down.php/e3876983a40b8cc94eb7120149af3c1d.zip" class="download-btn mobile-download">
+                        <i class="fas fa-download"></i> 立即下载
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <p class="download-tip">
+            <i class="fas fa-info-circle"></i> 注意: 点击下载按钮后，文件将自动开始下载，如点击无反应，请耐心等待几分钟。
+        </p>
+    </div>
+
+    <script>
+        // 1. 通过屏幕宽度检测设备（768px是移动端和桌面端的常用分界值）
+        function detectDeviceByScreenWidth() {
+            const screenWidth = window.innerWidth;
+            // 屏幕宽度 ≤ 768px 判定为手机端（Android）
+            const isMobile = screenWidth <= 768;
+            return {
+                isMobile: isMobile,
+                deviceType: isMobile ? 'mobile' : 'pc'
+            };
+        }
+
+        // 2. 根据屏幕宽度初始化页面
+        function initPageByScreenWidth() {
+            const device = detectDeviceByScreenWidth();
+            const deviceTag = document.getElementById('deviceTag');
+            const pcDirectory = document.getElementById('pcDirectory');
+            const mobileDirectory = document.getElementById('mobileDirectory');
+
+            // 更新设备提示标签（同步修复Windows图标类名）
+            if (device.isMobile) {
+                deviceTag.innerHTML = '<i class="fab fa-android"></i> Android下载中心';
+                pcDirectory.classList.add('hidden');
+                mobileDirectory.classList.remove('hidden');
+            } else {
+                deviceTag.innerHTML = '<i class="fab fa-windows"></i> Windows下载中心';
+                mobileDirectory.classList.add('hidden');
+                pcDirectory.classList.remove('hidden');
+            }
+        }
+
+        // 3. 监听窗口大小变化，实时切换目录
+        function listenScreenResize() {
+            window.addEventListener('resize', function() {
+                initPageByScreenWidth();
+            });
+        }
+
+        // 4. 下载按钮点击动画
+        function initDownloadButtons() {
+            // 获取所有下载按钮
+            const downloadBtns = document.querySelectorAll('.download-btn');
+            
+            downloadBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // 保存原始内容
+                    const originalHTML = this.innerHTML;
+                    
+                    // 替换为加载动画
+                    this.innerHTML = '<div class="loader"></div> 正在下载...';
+                    
+                    // 禁用按钮防止重复点击
+                    this.style.pointerEvents = 'none';
+                    
+                    // 3秒后恢复原始内容
+                    setTimeout(() => {
+                        this.innerHTML = originalHTML;
+                        this.style.pointerEvents = 'auto';
+                    }, 3000);
+                });
+            });
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', function() {
+            initPageByScreenWidth(); // 初始检测
+            listenScreenResize();    // 监听窗口变化
+            initDownloadButtons();   // 初始化按钮动画
+        });
+    </script>
+</body>
+</html>
