@@ -137,7 +137,7 @@
             padding: 20px;
             border: 1px solid var(--border-light);
             flex: 1;
-            min-height: 0;
+            min-height: 0; /* 确保内部滚动容器能正确收缩 */
         }
 
         /* 封面容器：加入新年灯笼光晕动画 */
@@ -194,7 +194,7 @@
             scrollbar-width: thin;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            /* 移除 justify-content: center，让歌词默认从顶部开始排列 */
             position: relative;
         }
 
@@ -250,6 +250,7 @@
             text-align: center;
             padding: 20px;
             opacity: 0.8;
+            margin: auto; /* 在 Flex 容器中垂直居中 */
         }
 
         /* 歌曲信息栏 */
