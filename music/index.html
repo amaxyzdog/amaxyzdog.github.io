@@ -3,76 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>极光音乐</title>
+    <title>极光音乐 · 新春版</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* 默认明亮主题 */
+        /* 默认明亮主题 —— 加入新年暖色微调 */
         :root {
-            --bg-gradient-start: #eef2f6;
-            --bg-gradient-end: #d9e2ef;
-            --glass-bg: rgba(255, 255, 255, 0.7);
+            --bg-gradient-start: #fef5e7;  /* 微调为暖白 */
+            --bg-gradient-end: #f0d9cf;    /* 淡粉色调，更有年味 */
+            --glass-bg: rgba(255, 245, 235, 0.7);
             --border-light: rgba(0, 0, 0, 0.08);
             --text-primary: #1e293b;
             --text-secondary: #334155;
             --text-muted: #475569;
-            --playlist-bg: rgba(255, 255, 255, 0.5);
+            --playlist-bg: rgba(255, 240, 230, 0.6);
             --playlist-item-bg: rgba(0, 0, 0, 0.02);
-            --playlist-item-hover: rgba(74, 108, 247, 0.1);
-            --active-gradient: linear-gradient(135deg, #b1c5f0, #d6e0ff);
-            --cover-bg: linear-gradient(135deg, #d1dbf0, #b0c2e8);
-            --lyrics-bg: rgba(255, 255, 255, 0.8);
-            --lyrics-text: #1e293b;
-            --lyrics-active-bg: linear-gradient(90deg, #a0b8e0, transparent 80%);
-            --lyrics-active-text: #1e293b;
-            --lyrics-active-shadow: 0 2px 8px rgba(95, 157, 243, 0.2);
-            --lyrics-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --control-bg: rgba(255, 255, 255, 0.6);
-            --button-color: #1e293b;
-            --button-hover-bg: rgba(74, 108, 247, 0.2);
+            --playlist-item-hover: rgba(230, 100, 80, 0.15); /* 红色调悬停 */
+            --active-gradient: linear-gradient(135deg, #fad0c4, #ffdab9);
+            --cover-bg: linear-gradient(135deg, #ffe0b5, #ffc8a2); /* 暖色封面 */
+            --lyrics-bg: rgba(255, 240, 235, 0.8);
+            --lyrics-text: #2c1e1e;
+            --lyrics-active-bg: linear-gradient(90deg, #ffb6a0, transparent 80%);
+            --lyrics-active-text: #a62b1a;
+            --lyrics-active-shadow: 0 2px 8px rgba(255, 100, 50, 0.3);
+            --control-bg: rgba(255, 235, 220, 0.7);
+            --button-color: #4a251c;
+            --button-hover-bg: rgba(230, 100, 60, 0.3);
             --progress-bg: rgba(0,0,0,0.1);
-            --progress-fill: linear-gradient(90deg, #5f9df3, #8fbcff);
-            --progress-buffer: rgba(95, 157, 243, 0.3);
-            --progress-thumb: #2d4c9e;
+            --progress-fill: linear-gradient(90deg, #e05a3a, #ffaa5e); /* 红金渐变 */
+            --progress-buffer: rgba(230, 120, 70, 0.4);
+            --progress-thumb: #c0452c;
             --volume-bg: rgba(0,0,0,0.1);
-            --volume-fill: linear-gradient(90deg, #5f9df3, #8fbcff);
-            --footer-color: #475569;
-            /* 新增状态提示颜色 */
+            --volume-fill: linear-gradient(90deg, #e05a3a, #ffaa5e);
+            --footer-color: #7b4f3a;
             --status-success: #10b981;
             --status-warning: #f59e0b;
             --status-error: #ef4444;
             --status-info: #3b82f6;
         }
 
-        /* 深色主题 */
+        /* 深色主题 (保持原有优雅，只微调部分为新年金红色) */
         body.dark-theme {
-            --bg-gradient-start: #0b1120;
-            --bg-gradient-end: #19223a;
-            --glass-bg: rgba(18, 26, 40, 0.7);
-            --border-light: rgba(255, 255, 255, 0.08);
-            --text-primary: #fff;
-            --text-secondary: #cbd5e6;
-            --text-muted: #9aa9c7;
-            --playlist-bg: rgba(0, 0, 0, 0.25);
-            --playlist-item-bg: rgba(255, 255, 255, 0.02);
-            --playlist-item-hover: rgba(74, 108, 247, 0.15);
-            --active-gradient: linear-gradient(135deg, #2d4c9e, #1d2f5a);
-            --cover-bg: linear-gradient(135deg, #1e2b48, #0f1a30);
-            --lyrics-bg: rgba(10, 15, 26, 0.6);
-            --lyrics-text: #a4b3d1;
-            --lyrics-active-bg: linear-gradient(90deg, #2e4579, transparent 80%);
-            --lyrics-active-text: #d3e0ff;
-            --lyrics-active-shadow: 0 2px 8px rgba(95, 157, 243, 0.3);
-            --control-bg: rgba(0, 0, 0, 0.3);
-            --button-color: #d3e0ff;
-            --button-hover-bg: rgba(95, 157, 243, 0.2);
-            --progress-bg: rgba(255,255,255,0.15);
-            --progress-fill: linear-gradient(90deg, #5f9df3, #8fbcff);
-            --progress-buffer: rgba(95, 157, 243, 0.3);
-            --progress-thumb: white;
+            --bg-gradient-start: #1f1820;
+            --bg-gradient-end: #2b1e25;
+            --glass-bg: rgba(30, 20, 25, 0.7);
+            --border-light: rgba(255, 200, 150, 0.15);
+            --text-primary: #ffe7d4;
+            --text-secondary: #ecccb3;
+            --text-muted: #cfa88b;
+            --playlist-bg: rgba(40, 25, 25, 0.5);
+            --playlist-item-bg: rgba(255, 180, 140, 0.05);
+            --playlist-item-hover: rgba(255, 120, 70, 0.25);
+            --active-gradient: linear-gradient(135deg, #a6452a, #5e2e20);
+            --cover-bg: linear-gradient(135deg, #5e3a2c, #3f261e);
+            --lyrics-bg: rgba(30, 18, 18, 0.7);
+            --lyrics-text: #eecbad;
+            --lyrics-active-bg: linear-gradient(90deg, #b95338, transparent 80%);
+            --lyrics-active-text: #ffdbbc;
+            --lyrics-active-shadow: 0 2px 10px #ff6a4d80;
+            --control-bg: rgba(30, 15, 15, 0.5);
+            --button-color: #ffc8a2;
+            --button-hover-bg: rgba(255, 120, 70, 0.3);
+            --progress-bg: rgba(255, 255, 255, 0.15);
+            --progress-fill: linear-gradient(90deg, #d94f30, #ffb347);
+            --progress-buffer: rgba(255, 120, 70, 0.3);
+            --progress-thumb: #ffae8a;
             --volume-bg: rgba(255,255,255,0.2);
-            --volume-fill: linear-gradient(90deg, #5f9df3, #8fbcff);
-            --footer-color: #5f6f8a;
-            /* 深色主题状态色适配 */
+            --volume-fill: linear-gradient(90deg, #d94f30, #ffb347);
+            --footer-color: #cc9f80;
             --status-success: #34d399;
             --status-warning: #fbbf24;
             --status-error: #f87171;
@@ -90,7 +87,7 @@
         html, body {
             height: 100%;
             width: 100%;
-            overflow: hidden; /* 禁止页面滚动 */
+            overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
@@ -98,23 +95,22 @@
         body {
             background: linear-gradient(145deg, var(--bg-gradient-start), var(--bg-gradient-end));
             display: flex;
-            align-items: stretch; /* 让子元素拉伸填满高度 */
-            justify-content: stretch; /* 让子元素拉伸填满宽度 */
-            padding: 0 !important; /* 移除所有默认内边距 */
+            align-items: stretch;
+            justify-content: stretch;
+            padding: 0 !important;
             transition: background 0.3s ease;
         }
 
-        /* 播放器容器：完全填满屏幕 */
         .glass-player {
             width: 100%;
             height: 100%;
             background: var(--glass-bg);
             backdrop-filter: blur(16px) saturate(180%);
             -webkit-backdrop-filter: blur(16px);
-            border: none !important; /* 移除边框 */
-            border-radius: 0 !important; /* 移除圆角，全屏显示 */
-            box-shadow: none !important; /* 移除阴影 */
-            padding: 16px; /* 内部留白，可根据需要调整 */
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            padding: 16px;
             color: var(--text-primary);
             transition: background 0.3s, border-color 0.3s;
             position: relative;
@@ -129,22 +125,22 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            overflow: hidden; /* 防止内部内容溢出 */
+            overflow: hidden;
         }
 
-        /* 封面+歌词区域：自适应高度 */
+        /* 封面+歌词区域 */
         .cover-lyrics {
             display: flex;
             gap: 20px;
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.05);
             border-radius: 28px;
             padding: 20px;
             border: 1px solid var(--border-light);
-            flex: 1; /* 填充剩余高度 */
-            min-height: 0; /* 解决flex布局下最小高度问题 */
+            flex: 1;
+            min-height: 0;
         }
 
-        /* 封面容器：固定尺寸，适配不同屏幕 */
+        /* 封面容器：加入新年灯笼光晕动画 */
         .cover-wrapper {
             flex-shrink: 0;
             width: 180px;
@@ -154,18 +150,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 15px 25px -8px black;
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 15px 25px -8px rgba(200, 80, 40, 0.3);
+            border: 1px solid rgba(255,215,0,0.3);
             transition: background 0.3s;
+            animation: coverGlow 4s ease-in-out infinite; /* 新年暖光 */
+        }
+
+        @keyframes coverGlow {
+            0% { box-shadow: 0 15px 25px -8px rgba(230, 100, 60, 0.3); }
+            50% { box-shadow: 0 20px 35px -4px rgba(255, 200, 50, 0.7); }
+            100% { box-shadow: 0 15px 25px -8px rgba(230, 100, 60, 0.3); }
         }
 
         .cover-emoji {
             font-size: 90px;
             line-height: 1;
-            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 8px 12px rgba(230, 80, 40, 0.4));
+            animation: emojiSway 3s ease-in-out infinite;
         }
 
-        /* 歌词区域：填满剩余空间 */
+        @keyframes emojiSway {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(3deg) scale(1.02); }
+            75% { transform: rotate(-3deg) scale(0.98); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        /* 歌词区域 */
         .lyrics-wrapper {
             flex: 1;
             background: var(--lyrics-bg);
@@ -173,7 +184,7 @@
             padding: 18px 20px;
             border: 1px solid var(--border-light);
             backdrop-filter: blur(4px);
-            height: 100%; /* 填满父容器高度 */
+            height: 100%;
             overflow-y: auto;
             scroll-behavior: smooth;
             font-size: 15px;
@@ -187,10 +198,9 @@
             position: relative;
         }
 
-        /* 歌词行样式 - 核心优化 */
         .lyrics-line {
             color: var(--lyrics-text);
-            transition: var(--lyrics-transition);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 4px 16px;
             border-radius: 24px;
             white-space: pre-wrap;
@@ -201,7 +211,6 @@
             margin: 2px 0;
         }
 
-        /* 高亮歌词样式增强 */
         .lyrics-line.active {
             color: var(--lyrics-active-text);
             background: var(--lyrics-active-bg);
@@ -214,7 +223,6 @@
             position: relative;
         }
 
-        /* 中英文歌词差异化样式 */
         .lyrics-line.chinese {
             font-size: 16px;
             line-height: 2;
@@ -237,7 +245,6 @@
             line-height: 2;
         }
 
-        /* 歌词加载状态 */
         .lyrics-loading {
             color: var(--text-muted);
             text-align: center;
@@ -245,7 +252,7 @@
             opacity: 0.8;
         }
 
-        /* 歌曲信息栏 - 优化状态显示 */
+        /* 歌曲信息栏 */
         .song-info-bar {
             display: flex;
             align-items: center;
@@ -258,12 +265,11 @@
         .song-title {
             font-size: 22px;
             font-weight: 600;
-            background: linear-gradient(135deg, var(--text-primary), #5f9df3);
+            background: linear-gradient(135deg, var(--text-primary), #d94f30);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* 优化状态条样式 */
         #file-status {
             font-size: 14px;
             padding: 4px 12px;
@@ -278,7 +284,6 @@
             max-width: 80%;
         }
 
-        /* 状态类型样式 */
         #file-status.success {
             background: rgba(16, 185, 129, 0.1);
             color: var(--status-success);
@@ -299,7 +304,7 @@
             color: var(--status-info);
         }
 
-        /* 控制栏：基础样式优化 */
+        /* 控制栏 */
         .controls-bar {
             background: var(--control-bg);
             border-radius: 60px;
@@ -308,18 +313,17 @@
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px; /* 减小默认间距 */
+            gap: 12px;
             backdrop-filter: blur(8px);
             transition: background 0.3s;
-            flex-shrink: 0; /* 防止被压缩 */
-            width: 100%; /* 确保宽度100% */
+            flex-shrink: 0;
+            width: 100%;
         }
 
-        /* 播放控制按钮组 */
         .action-buttons {
             display: flex;
-            gap: 8px; /* 减小按钮间距 */
-            flex-shrink: 0; /* 防止按钮被压缩 */
+            gap: 8px;
+            flex-shrink: 0;
         }
 
         .action-buttons button {
@@ -343,13 +347,12 @@
             color: var(--text-primary);
         }
 
-        /* 进度条区域 */
         .progress-area {
-            flex: 1; /* 占用剩余空间 */
-            min-width: 180px; /* 减小最小宽度 */
+            flex: 1;
+            min-width: 180px;
             display: flex;
             align-items: center;
-            gap: 8px; /* 减小间距 */
+            gap: 8px;
             position: relative;
         }
 
@@ -357,7 +360,7 @@
             font-size: 14px;
             color: var(--text-muted);
             font-variant-numeric: tabular-nums;
-            min-width: 40px; /* 减小时间显示宽度 */
+            min-width: 40px;
             text-align: center;
         }
 
@@ -411,7 +414,7 @@
             height: 18px;
             background: var(--progress-thumb);
             border-radius: 50%;
-            box-shadow: 0 0 10px #5f9df3, 0 0 20px rgba(95,157,243,0.5);
+            box-shadow: 0 0 10px #ff884d, 0 0 20px rgba(255,120,60,0.5);
             cursor: pointer;
             border: 2px solid white;
             margin-top: -5px;
@@ -426,22 +429,21 @@
             border-radius: 20px;
         }
 
-        /* 音量控制区域 */
         .volume-area {
             display: flex;
             align-items: center;
-            gap: 6px; /* 减小间距 */
+            gap: 6px;
             color: var(--text-muted);
-            flex-shrink: 0; /* 防止被压缩 */
-            min-width: 100px; /* 固定最小宽度 */
+            flex-shrink: 0;
+            min-width: 100px;
         }
 
         .volume-area i {
-            font-size: 16px; /* 减小图标尺寸 */
+            font-size: 16px;
         }
 
         .volume-slider {
-            width: 60px; /* 减小音量滑块宽度 */
+            width: 60px;
             height: 5px;
             -webkit-appearance: none;
             background: var(--volume-bg);
@@ -457,25 +459,24 @@
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid white;
-            box-shadow: 0 0 8px #5f9df3;
+            box-shadow: 0 0 8px #ff884d;
         }
 
-        /* 功能按钮区 */
         .mode-area {
             display: flex;
             align-items: center;
-            gap: 4px; /* 减小按钮间距 */
-            margin-left: 8px; /* 减小左边距 */
-            flex-shrink: 0; /* 防止被压缩 */
+            gap: 4px;
+            margin-left: 8px;
+            flex-shrink: 0;
         }
 
         .mode-btn, .menu-btn, .theme-btn {
             background: transparent;
             border: none;
             color: var(--button-color);
-            font-size: 20px; /* 减小图标尺寸 */
+            font-size: 20px;
             cursor: pointer;
-            width: 36px; /* 减小按钮尺寸 */
+            width: 36px;
             height: 36px;
             border-radius: 50%;
             display: flex;
@@ -490,7 +491,7 @@
             color: var(--text-primary);
         }
 
-        /* 播放列表面板：全屏浮层 */
+        /* 播放列表面板 */
         .playlist-panel {
             position: absolute;
             top: 0;
@@ -523,7 +524,7 @@
             color: var(--text-muted);
             margin-bottom: 16px;
             padding-left: 8px;
-            border-left: 3px solid #5f9df3;
+            border-left: 3px solid #e05a3a; /* 新年红色 */
         }
 
         .playlist {
@@ -553,19 +554,19 @@
 
         .playlist-item:hover {
             background: var(--playlist-item-hover);
-            border-color: rgba(95, 157, 243, 0.3);
+            border-color: rgba(230, 120, 70, 0.3);
             color: var(--text-primary);
         }
 
         .playlist-item.active {
             background: var(--active-gradient);
-            border-color: #5f9df3;
+            border-color: #e05a3a;
             color: var(--text-primary);
         }
 
         .playlist-item i {
             font-size: 14px;
-            color: #5f9df3;
+            color: #e05a3a;
             width: 20px;
             text-align: center;
         }
@@ -581,6 +582,7 @@
             text-overflow: ellipsis;
         }
 
+        /* 底部新年特别样式 */
         .footer-note {
             font-size: 12px;
             color: var(--footer-color);
@@ -589,6 +591,24 @@
             transition: color 0.3s;
             flex-shrink: 0;
         }
+        .new-year-greeting {
+            display: inline-block;
+            font-weight: 800;
+            background: linear-gradient(135deg, #d94f30, #ffb347, #c0852b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: newYearPulse 2.2s infinite ease-in-out;
+            padding: 4px 12px;
+            border-radius: 30px;
+            text-shadow: 0 0 8px rgba(255, 200, 0, 0.3);
+            font-size: 1.1em;
+            letter-spacing: 1px;
+        }
+        @keyframes newYearPulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.1); opacity: 1; text-shadow: 0 0 16px #ffaa33; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
 
         .loading {
             color: var(--text-muted);
@@ -596,28 +616,24 @@
             padding: 20px;
         }
 
-        /* 移动端适配 - 重点优化 */
+        /* 移动端适配 (保留原有，增加新年元素适应) */
         @media (max-width: 700px) {
             .glass-player {
                 padding: 12px;
             }
-
             .cover-lyrics {
                 flex-direction: column;
                 align-items: center;
                 gap: 16px;
                 padding: 16px;
             }
-            
             .cover-wrapper {
                 width: 140px !important;
                 height: 140px !important;
             }
-            
             .cover-emoji {
                 font-size: 70px !important;
             }
-            
             .lyrics-wrapper {
                 height: 100% !important;
                 font-size: 17px !important;
@@ -625,170 +641,138 @@
                 padding: 16px !important;
                 scrollbar-width: none !important;
             }
-            
             .lyrics-wrapper::-webkit-scrollbar {
                 display: none;
             }
-            
-            /* 移动端歌词样式增强 */
             .lyrics-line {
                 padding: 6px 12px !important;
             }
-            
             .lyrics-line.active {
                 padding: 8px 16px !important;
                 transform: scale(1.08) !important;
             }
-            
             .lyrics-line.chinese {
                 font-size: 17px !important;
                 line-height: 2.2 !important;
             }
-            
             .lyrics-line.english {
                 font-size: 15px !important;
                 line-height: 2 !important;
             }
-            
             .lyrics-line.active.chinese {
                 font-size: 19px !important;
                 line-height: 2.4 !important;
             }
-            
             .lyrics-line.active.english {
                 font-size: 17px !important;
                 line-height: 2.2 !important;
             }
-            
-            /* 移动端控制栏深度优化 */
             .controls-bar {
-                padding: 10px 12px !important; /* 减小内边距 */
-                gap: 8px !important; /* 减小元素间距 */
-                border-radius: 30px !important; /* 适配小屏的圆角 */
-                flex-wrap: wrap !important; /* 强制换行 */
+                padding: 10px 12px !important;
+                gap: 8px !important;
+                border-radius: 30px !important;
+                flex-wrap: wrap !important;
             }
-            
-            /* 播放按钮优化 */
             .action-buttons {
-                width: 100%; /* 按钮组占满宽度 */
-                justify-content: center; /* 居中显示 */
-                margin-bottom: 8px; /* 底部间距 */
-                gap: 15px !important; /* 增大移动端按钮间距 */
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 8px;
+                gap: 15px !important;
             }
-            
             .action-buttons button {
                 width: 50px !important;
                 height: 50px !important;
                 font-size: 28px !important;
             }
-            
-            /* 进度条区域优化 */
             .progress-area {
-                min-width: 100% !important; /* 占满整行 */
-                order: 2 !important; /* 放在第二行 */
-                margin: 0 !important; /* 移除外边距 */
-                gap: 5px !important; /* 减小内部间距 */
+                min-width: 100% !important;
+                order: 2 !important;
+                margin: 0 !important;
+                gap: 5px !important;
             }
-            
             .progress-time {
-                font-size: 12px !important; /* 减小时间字体 */
-                min-width: 35px !important; /* 减小时间宽度 */
+                font-size: 12px !important;
+                min-width: 35px !important;
             }
-            
-            /* 音量控制优化 */
             .volume-area {
-                position: absolute !important; /* 绝对定位 */
-                top: 12px !important; /* 定位到右上角 */
+                position: absolute !important;
+                top: 12px !important;
                 right: 12px !important;
-                min-width: auto !important; /* 取消最小宽度 */
+                min-width: auto !important;
                 width: auto !important;
                 z-index: 1 !important;
             }
-            
             .volume-slider {
-                width: 50px !important; /* 进一步减小音量滑块 */
+                width: 50px !important;
             }
-            
-            /* 功能按钮优化 */
             .mode-area {
-                position: absolute !important; /* 绝对定位 */
-                top: 12px !important; /* 定位到左上角 */
+                position: absolute !important;
+                top: 12px !important;
                 left: 12px !important;
                 order: 0 !important;
                 gap: 4px !important;
                 min-width: auto !important;
             }
-            
             .mode-btn, .menu-btn, .theme-btn {
-                width: 32px !important; /* 进一步减小尺寸 */
+                width: 32px !important;
                 height: 32px !important;
                 font-size: 18px !important;
             }
-            
             .song-title {
                 font-size: 20px !important;
                 width: 100% !important;
                 text-align: center !important;
                 margin-bottom: 8px !important;
             }
-            
             #file-status {
                 width: 100% !important;
                 text-align: center !important;
                 font-size: 13px !important;
                 max-width: 100%;
             }
-            
             .playlist-panel {
                 padding: 16px !important;
             }
-            
             .playlist-item {
                 padding: 14px 16px !important;
                 font-size: 16px !important;
             }
+            .new-year-greeting {
+                font-size: 1em !important;
+                display: inline-block;
+                margin-top: 2px;
+            }
         }
-
-        /* 超小屏适配（小于375px） */
         @media (max-width: 375px) {
             .controls-bar {
                 padding: 8px 8px !important;
             }
-            
             .action-buttons button {
                 width: 45px !important;
                 height: 45px !important;
                 font-size: 24px !important;
             }
-            
             .volume-slider {
                 width: 40px !important;
             }
-            
             .mode-btn, .menu-btn, .theme-btn {
                 width: 28px !important;
                 height: 28px !important;
                 font-size: 16px !important;
             }
-            
             .progress-time {
                 font-size: 11px !important;
                 min-width: 30px !important;
             }
-            
-            /* 超小屏歌词适配 */
             .lyrics-line.chinese {
                 font-size: 16px !important;
             }
-            
             .lyrics-line.english {
                 font-size: 14px !important;
             }
-            
             .lyrics-line.active.chinese {
                 font-size: 18px !important;
             }
-            
             .lyrics-line.active.english {
                 font-size: 16px !important;
             }
@@ -800,7 +784,8 @@
     <div class="main-content">
         <div class="cover-lyrics">
             <div class="cover-wrapper">
-                <span class="cover-emoji" id="cover-emoji">🎵</span>
+                <!-- 封面emoji改为新年音乐组合，增添节日气氛 -->
+                <span class="cover-emoji" id="cover-emoji">🧧🎵</span>
             </div>
             <div class="lyrics-wrapper" id="lyrics-container">
                 <div class="lyrics-loading">🕐加载歌词中</div>
@@ -839,14 +824,17 @@
                 <button class="theme-btn" id="theme-btn" title="切换主题"><i class="fas fa-sun" id="theme-icon"></i></button>
             </div>
         </div>
+
+        <!-- 底部新年祝福 —— 醒目而喜庆 -->
         <div class="footer-note">
             本播放器采用Github官方源，可能因网络问题导致歌曲无法播放、无法加载歌词，敬请谅解。<br/>
-            新年快乐！
+            <span class="new-year-greeting">🐴 2026 丙午新春大吉 🎉🧧</span>
         </div>
     </div>
 
+    <!-- 歌单面板标题也加一个小灯笼 -->
     <div class="playlist-panel hidden" id="playlist-panel">
-        <h3><i class="fas fa-list-ul" style="margin-right: 8px;"></i>歌单</h3>
+        <h3><i class="fas fa-list-ul" style="margin-right: 8px;"></i>歌单 <span style="font-size:1rem; margin-left:6px;">🏮🎊</span></h3>
         <ul class="playlist" id="playlist-ul">
             <li class="loading"><i class="fas fa-spinner fa-pulse"></i>加载列表中...</li>
         </ul>
@@ -891,16 +879,12 @@
         let playMode = 0;
         const modeIcons = ['fa-repeat', 'fa-repeat-1', 'fa-random'];
 
-        // ===== 新增：状态提示工具函数 =====
+        // ===== 状态提示工具函数 (保留原样) =====
         function updateStatus(message, type = 'info') {
-            // 清除之前的状态类
             fileStatus.className = '';
-            // 添加新的状态类
             fileStatus.classList.add(type);
-            // 设置提示文本
             fileStatus.textContent = message;
             
-            // 移动端适配：如果是移动端且类型为error，3秒后自动清除错误状态
             if (type === 'error' && window.innerWidth <= 700) {
                 setTimeout(() => {
                     if (fileStatus.textContent === message) {
@@ -930,7 +914,6 @@
         }
         themeBtn.addEventListener('click', toggleTheme);
 
-        // 更新音量图标
         function updateVolumeIcon(volume) {
             let iconClass = 'fas fa-volume-up';
             if (volume <= 0) {
@@ -948,31 +931,21 @@
             return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
         }
 
-        // ===== 新增：智能识别歌词语言类型 =====
+        // 语言检测 (原样)
         function detectLanguage(text) {
-            // 移除空白字符
             const cleanText = text.trim();
             if (!cleanText) return 'unknown';
-            
-            // 中文字符正则
             const chineseRegex = /[\u4e00-\u9fff]/;
-            // 英文字符正则
             const englishRegex = /[a-zA-Z]/;
-            
             const hasChinese = chineseRegex.test(cleanText);
             const hasEnglish = englishRegex.test(cleanText);
-            
-            // 优先判断纯中文
             if (hasChinese && !hasEnglish) return 'chinese';
-            // 纯英文
             else if (hasEnglish && !hasChinese) return 'english';
-            // 混合字符，按占比判断
             else if (hasChinese && hasEnglish) {
                 const chineseCount = (cleanText.match(chineseRegex) || []).length;
                 const englishCount = (cleanText.match(englishRegex) || []).length;
                 return chineseCount >= englishCount ? 'chinese' : 'english';
             }
-            // 其他语言默认按英文处理
             else return 'english';
         }
 
@@ -993,19 +966,16 @@
                 if (times.length > 0) {
                     let text = line.replace(timeRegex, '').trim();
                     if (text === '') text = ' ';
-                    // 检测歌词语言类型
                     const lang = detectLanguage(text);
                     times.forEach(t => {
                         result.push({ time: t, text: text, lang: lang });
                     });
                 }
             });
-            // 按时间排序
             result.sort((a, b) => a.time - b.time);
             return result;
         }
 
-        // ===== 重构：渲染歌词，添加语言分类 =====
         function renderLyrics(lyricsArray) {
             lyricsContainer.innerHTML = '';
             if (!lyricsArray || lyricsArray.length === 0) {
@@ -1013,10 +983,8 @@
                 lyricLinesElements = [];
                 return;
             }
-            
             const fragment = document.createDocumentFragment();
             const elements = [];
-            
             lyricsArray.forEach((item) => {
                 const div = document.createElement('div');
                 div.className = `lyrics-line ${item.lang}`;
@@ -1029,19 +997,14 @@
                     lang: item.lang
                 });
             });
-            
             lyricsContainer.appendChild(fragment);
             lyricLinesElements = elements;
-            lastActiveIndex = -1; // 重置上次激活的索引
+            lastActiveIndex = -1;
         }
 
-        // ===== 优化：歌词高亮和动画效果 =====
         function updateLyricsHighlight(currentTime) {
             if (!lyricLinesElements.length || !lyricsData.length) return;
-            
             let activeIndex = -1;
-            
-            // 找到当前时间对应的歌词行
             for (let i = 0; i < lyricsData.length; i++) {
                 if (lyricsData[i].time <= currentTime) {
                     activeIndex = i;
@@ -1049,52 +1012,35 @@
                     break;
                 }
             }
-            
-            // 如果索引没有变化，不需要更新
             if (activeIndex === lastActiveIndex) return;
-            
-            // 移除之前的高亮
             if (lastActiveIndex >= 0 && lastActiveIndex < lyricLinesElements.length) {
                 lyricLinesElements[lastActiveIndex].element.classList.remove('active');
             }
-            
-            // 更新当前高亮
             if (activeIndex >= 0 && activeIndex < lyricLinesElements.length) {
                 const activeElement = lyricLinesElements[activeIndex].element;
                 activeElement.classList.add('active');
-                
-                // 平滑滚动到当前歌词
                 const container = lyricsContainer;
                 const scrollOffset = activeElement.offsetTop - (container.clientHeight / 2) + (activeElement.offsetHeight / 2);
-                
-                // 使用自定义动画滚动，替代默认的smooth
                 const scrollToSmoothly = (element, targetPosition, duration = 300) => {
                     const startPosition = element.scrollTop;
                     const distance = targetPosition - startPosition;
                     let startTime = null;
-                    
                     const animation = (currentTime) => {
                         if (startTime === null) startTime = currentTime;
                         const timeElapsed = currentTime - startTime;
                         const progress = Math.min(timeElapsed / duration, 1);
-                        // 使用缓动函数
                         const easeProgress = progress < 0.5 
                             ? 4 * progress * progress * progress 
                             : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-                        
                         element.scrollTop = startPosition + distance * easeProgress;
-                        
                         if (timeElapsed < duration) {
                             requestAnimationFrame(animation);
                         }
                     };
-                    
                     requestAnimationFrame(animation);
                 };
-                
                 scrollToSmoothly(container, scrollOffset);
             }
-            
             lastActiveIndex = activeIndex;
         }
 
@@ -1130,41 +1076,32 @@
             }
         }
 
-        // ===== 修复：加载歌曲逻辑，增强错误处理 =====
         function loadSong(index) {
             if (index < 0 || index >= playlist.length) {
                 updateStatus('无效的歌曲索引', 'error');
                 return;
             }
-            
             const song = playlist[index];
             currentIndex = index;
             nowPlayingTitle.textContent = song.name;
             updateStatus(`正在加载: ${song.name}`, 'info');
 
-            // 更新播放列表选中状态
             document.querySelectorAll('.playlist-item').forEach((item, i) => {
                 if (i === index) item.classList.add('active');
                 else item.classList.remove('active');
             });
 
-            // 重置音频
             audio.src = '';
             audio.load();
-            
-            // 设置音频源并加载
             try {
                 audio.src = song.audioUrl;
                 audio.load();
                 updateStatus('音频加载中...', 'info');
 
-                // 音频可播放回调
                 const onCanPlay = () => {
                     updateStatus('音频加载完成', 'success');
                     audio.removeEventListener('canplay', onCanPlay);
                 };
-                
-                // 音频错误回调
                 const onError = (e) => {
                     const errorMsg = {
                         1: '获取资源被中止',
@@ -1175,18 +1112,14 @@
                     updateStatus(`音频加载失败: ${errorMsg}`, 'error');
                     audio.removeEventListener('error', onError);
                 };
-
                 audio.addEventListener('canplay', onCanPlay);
                 audio.addEventListener('error', onError);
-
             } catch (e) {
                 updateStatus(`音频加载异常: ${e.message}`, 'error');
             }
 
-            // 加载歌词
             if (song.lrcUrl) {
                 updateStatus('正在加载歌词...', 'info');
-                // 添加超时控制的fetch请求
                 const fetchWithTimeout = (url, options = {}, timeout = 10000) => {
                     return Promise.race([
                         fetch(url, options),
@@ -1195,12 +1128,9 @@
                         )
                     ]);
                 };
-
                 fetchWithTimeout(song.lrcUrl, { 
                     mode: 'cors',
-                    headers: {
-                        'Accept': 'text/plain, */*'
-                    }
+                    headers: { 'Accept': 'text/plain, */*' }
                 })
                 .then(res => {
                     if (!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`);
@@ -1223,7 +1153,6 @@
                 updateStatus('无歌词文件', 'info');
             }
 
-            // 重置播放状态
             if (!audio.paused) {
                 audio.pause();
                 playIcon.className = 'fas fa-play-circle';
@@ -1242,7 +1171,6 @@
                 updateStatus('未找到音频文件', 'warning');
                 return;
             }
-            
             songs.forEach((song, idx) => {
                 const li = document.createElement('li');
                 li.className = 'playlist-item';
@@ -1268,34 +1196,24 @@
                 });
                 playlistUl.appendChild(li);
             });
-            
             updateStatus(`加载完成，共${songs.length}首歌曲`, 'success');
-            
             if (songs.length > 0) {
                 loadSong(0);
             }
         }
 
-        // ===== 修复：获取音乐列表，增强错误处理和重试机制 =====
         function fetchMusicList(retries = 2) {
             updateStatus('正在获取歌曲列表...', 'info');
-            
-            // 添加超时和重试机制
             const fetchWithRetry = async (url, options = {}, retriesLeft = retries) => {
                 try {
                     const controller = new AbortController();
                     const timeoutId = setTimeout(() => controller.abort(), 15000);
-                    
                     const res = await fetch(url, {
                         ...options,
                         signal: controller.signal,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
+                        headers: { 'Accept': 'application/json' }
                     });
-                    
                     clearTimeout(timeoutId);
-                    
                     if (!res.ok) throw new Error(`HTTP ${res.status}`);
                     return res.json();
                 } catch (err) {
@@ -1306,20 +1224,15 @@
                     throw err;
                 }
             };
-
             fetchWithRetry('https://api.github.com/repos/amaxyzdog/music/contents/')
                 .then(files => {
                     if (!Array.isArray(files)) throw new Error('目录格式异常');
-
-                    // 过滤MP3和LRC文件
                     const mp3Files = files.filter(f => 
                         f.name && f.name.toLowerCase().endsWith('.mp3') && f.type === 'file'
                     );
                     const lrcFiles = files.filter(f => 
                         f.name && f.name.toLowerCase().endsWith('.lrc') && f.type === 'file'
                     );
-
-                    // 构建歌词映射表（不区分大小写）
                     const lrcMap = {};
                     lrcFiles.forEach(lrc => {
                         if (lrc.name) {
@@ -1327,8 +1240,6 @@
                             lrcMap[base] = lrc.download_url;
                         }
                     });
-
-                    // 构建歌曲列表
                     const songs = mp3Files.map(mp3 => {
                         const base = mp3.name.slice(0, -4).toLowerCase();
                         return {
@@ -1336,8 +1247,7 @@
                             audioUrl: mp3.download_url || '',
                             lrcUrl: lrcMap[base] || null
                         };
-                    }).filter(song => song.audioUrl); // 过滤掉没有音频链接的歌曲
-
+                    }).filter(song => song.audioUrl);
                     playlist = songs;
                     renderPlaylist(playlist);
                 })
@@ -1345,8 +1255,6 @@
                     console.error('列表加载失败:', err);
                     updateStatus(`加载失败: ${err.message}`, 'error');
                     playlistUl.innerHTML = `<li class="playlist-item" style="color:var(--status-error); justify-content:center;"><i class="fas fa-exclamation-triangle"></i> ${err.message}</li>`;
-                    
-                    // 添加刷新按钮
                     const refreshLi = document.createElement('li');
                     refreshLi.className = 'playlist-item';
                     refreshLi.style.justifyContent = 'center';
@@ -1362,7 +1270,6 @@
                 updateStatus('暂无播放音频', 'warning');
                 return;
             }
-            
             if (audio.paused) {
                 audio.play()
                     .then(() => {
@@ -1420,7 +1327,6 @@
                 updateStatus('播放列表为空', 'warning');
                 return;
             }
-            
             let newIndex = getNextIndex(false);
             loadSong(newIndex);
             audio.play()
@@ -1439,7 +1345,6 @@
                 updateStatus('播放列表为空', 'warning');
                 return;
             }
-            
             let newIndex = getNextIndex(true);
             loadSong(newIndex);
             audio.play()
@@ -1455,7 +1360,6 @@
 
         function onEnded() {
             updateStatus('播放完成', 'info');
-            
             if (playMode === 1) {
                 audio.currentTime = 0;
                 audio.play()
@@ -1496,12 +1400,11 @@
 
         volumeSlider.addEventListener('input', (e) => {
             audio.volume = e.target.value;
-            updateVolumeIcon(e.target.value); // 更新音量图标
+            updateVolumeIcon(e.target.value);
             const volumePercent = Math.round(e.target.value * 100);
             updateStatus(`音量: ${volumePercent}%`, 'info');
         });
         
-        // 初始化音量
         audio.volume = 0.8;
         updateVolumeIcon(0.8);
 
@@ -1519,23 +1422,18 @@
             e.stopPropagation();
         }, { passive: true });
 
-        // 初始化
         updateStatus('初始化播放器...', 'info');
         fetchMusicList();
 
-        // 窗口大小变化时重新适配
         window.addEventListener('resize', () => {
-            // 重新计算歌词位置
             if (audio.currentTime) {
                 updateLyricsHighlight(audio.currentTime);
             }
         });
 
-        // 监听网络状态变化
         window.addEventListener('online', () => {
             updateStatus('网络已恢复', 'success');
         });
-        
         window.addEventListener('offline', () => {
             updateStatus('网络已断开', 'error');
         });
